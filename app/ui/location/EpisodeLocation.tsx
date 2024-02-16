@@ -1,6 +1,6 @@
 "use client";
 import { truncateString } from "@/app/lib/utils";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, ApolloError } from "@apollo/client";
 import { useState } from "react";
 
 const GET_CHARACTERS = gql`
@@ -53,12 +53,12 @@ const SearchLocationsByEpisode = () => {
 
   if (charactersLoading || locationsLoading) return <p>Loading...</p>;
   if (charactersError || locationsError)
-    return <p>Error: {charactersError || locationsError}</p>;
+    return <p>Error: {charactersError?.message || locationsError?.message}</p>;
 
   // Filter locations based on episodes associated with characters who reside in those locations
   const filteredLocations = locationsData.locations.results?.filter(
-    (location) =>
-      location.residents.some((resident) =>
+    (location: Location) =>
+      location.residents.some((resident: Character) =>
         resident.episode.some((episode) =>
           episode.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
@@ -74,7 +74,7 @@ const SearchLocationsByEpisode = () => {
         className="px-2 py-1 border-2 border-blue-500 w-[400px] rounded-md self-center"
       />
       <ul className="grid grid-cols-5 gap-10">
-        {filteredLocations.map((location) => (
+        {filteredLocations.map((location: Location) => (
           <li
             key={location.id}
             className="group rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:border-gray-200 hover:bg-gray-100 hover:dark:border-neutral-300 hover:dark:bg-neutral-400/30 w-[300px] flex-wrap"

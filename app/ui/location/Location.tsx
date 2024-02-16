@@ -30,7 +30,7 @@ export default function Countries() {
 
   return (
     <div>
-      {characters.map((character) => (
+      {characters.map((character: Character) => (
         <div key={character.id}>
           <h3>{character.name}</h3>
           <p>
