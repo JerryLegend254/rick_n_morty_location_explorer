@@ -16,7 +16,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} px-[156px] flex flex-col h-screen`}>
+        <nav>
+          <div className="uppercase tracking-widest mt-6 text-3xl font-bold flex justify-between">
+            <p>Rick and Morty</p>
+            <span className="text-blue-900">location explorer</span>
+          </div>
+        </nav>
+        <main className="py-8 flex-1">{children}</main>
+        <footer className="m-auto py-4">This is the footer</footer>
+      </body>
     </html>
   );
 }
