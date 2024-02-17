@@ -17,15 +17,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} px-[156px] flex flex-col h-screen`}>
+      <body
+        className={`${inter.className} px-[24px] lg:px-[156px] flex flex-col h-screen`}
+      >
         <nav>
-          <div className="uppercase tracking-widest mt-6 text-3xl font-bold flex justify-between">
-            <p>Rick and Morty</p>
-            <span className="text-blue-900">location explorer</span>
+          <div className="uppercase tracking-widest mt-6 text-3xl font-bold flex justify-between mx-auto">
+            <p className="text-center mx-auto md:mx-0">Rick and Morty</p>
+            <span className="text-blue-900 hidden md:inline-block">
+              location explorer
+            </span>
           </div>
         </nav>
         <main className="py-8 flex-1">{children}</main>
-        <footer className="m-auto py-4 font-bold">
+        <footer className="m-auto py-4 font-boldlg:">
           Rick and Morty Location Explorer
         </footer>
       </body>

@@ -72,17 +72,15 @@ const SearchLocationsByEpisode = () => {
         placeholder="Search by episode name"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="px-2 py-1 border-2 border-blue-500 w-[400px] rounded-md self-center"
+        className="px-2 py-1 border-2 border-blue-500 w-[240px] lg:w-[400px] rounded-md self-center"
       />
-      <ul className="grid grid-cols-5 gap-10">
+      <ul className="flex flex-col sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 px-auto">
         {filteredLocations.map((location: Location) => (
           <li
             key={location.id}
-            className="group rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:border-gray-200 hover:bg-gray-100 hover:dark:border-neutral-300 hover:dark:bg-neutral-400/30 w-[300px] flex-wrap"
+            className="group rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:border-gray-200 hover:bg-gray-100 hover:dark:border-neutral-300 hover:dark:bg-neutral-400/30 w-[300px] flex-wrap mx-auto"
           >
-            <Link
-              href={`/location/${location.id}`}
-            >
+            <Link href={`/location/${location.id}`}>
               <h2 className={`mb-1 text-xl font-semibold`}>
                 {truncateString(location.name)}
               </h2>

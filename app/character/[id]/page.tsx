@@ -43,7 +43,7 @@ export default async function CharacterDetailsPage({
   return (
     <>
       <BackButton />
-      <div className="flex gap-8 items-center justify-center h-[70%]">
+      <div className="flex flex-col md:flex-row items-center gap-8 md:items-center md:justify-center md:h-[70%]">
         <Image
           src={character.image}
           width={320}
