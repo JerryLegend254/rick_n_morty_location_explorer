@@ -39,8 +39,8 @@ const GET_LOCATIONS = gql`
   }
 `;
 
-const SearchLocationsByEpisode = () => {
-  const [searchTerm, setSearchTerm] = useState("Anato");
+const SearchLocationsByCategory = ({ filterType }: { filterType: string }) => {
+  const [searchTerm, setSearchTerm] = useState("");
   const {
     loading: charactersLoading,
     error: charactersError,
@@ -56,26 +56,43 @@ const SearchLocationsByEpisode = () => {
   if (charactersError || locationsError)
     return <p>Error: {charactersError?.message || locationsError?.message}</p>;
 
-  // Filter locations based on episodes associated with characters who reside in those locations
-  const filteredLocations = locationsData.locations.results?.filter(
-    (location: Location) =>
-      location.residents.some((resident: Character) =>
-        resident.episode.some((episode) =>
-          episode.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter based on selected filter type
+  let filteredItems = [];
+  if (filterType === "location") {
+    filteredItems = locationsData.locations.results.filter(
+      (location: Location) =>
+        location.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  } else if (filterType === "character") {
+    filteredItems = locationsData.locations.results.filter(
+      (location: Location) =>
+        location.residents.some((resident: Character) =>
+          resident.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      )
-  );
+    );
+  } else if (filterType === "episode") {
+    // Logic for episode filtering
+    filteredItems = locationsData.locations.results?.filter(
+      (location: Location) =>
+        location.residents.some((resident: Character) =>
+          resident.episode.some((episode) =>
+            episode.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        )
+    );
+  }
+
   return (
     <div className="flex flex-col justify-center gap-12">
       <input
         type="text"
-        placeholder="Search by episode name"
+        placeholder={`Search by ${filterType} name`}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="px-2 py-1 border-2 border-blue-500 w-[240px] lg:w-[400px] rounded-md self-center"
       />
-      <ul className="flex flex-col sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 px-auto">
-        {filteredLocations.map((location: Location) => (
+      <ul className="flex flex-col sm:grid sm:grid-cols-2 2xl:grid-cols-3 gap-10 px-auto">
+        {filteredItems.map((location: Location) => (
           <li
             key={location.id}
             className="group rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:border-gray-200 hover:bg-gray-100 hover:dark:border-neutral-300 hover:dark:bg-neutral-400/30 w-[300px] flex-wrap mx-auto"
@@ -101,4 +118,4 @@ const SearchLocationsByEpisode = () => {
   );
 };
 
-export default SearchLocationsByEpisode;
+export default SearchLocationsByCategory;
