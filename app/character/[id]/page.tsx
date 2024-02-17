@@ -69,7 +69,7 @@ export default function CharacterDetailsPage({
           {showForm ? "Close Form" : "Add Note"}
         </button>
       </div>
-      <div className="flex justify-around">
+      <div className="flex flex-col xl:flex-row justify-around mb-8">
         <div className="flex flex-col md:flex-row items-center gap-8 md:items-center md:justify-center md:h-[70%]">
           <Image
             src={character.image}
