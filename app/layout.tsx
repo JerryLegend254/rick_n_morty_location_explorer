@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ApolloProvider } from "@apollo/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
           </div>
         </nav>
         <main className="py-8 flex-1">{children}</main>
-        <footer className="m-auto py-4">This is the footer</footer>
+        <footer className="m-auto py-4 font-bold">
+          Rick and Morty Location Explorer
+        </footer>
       </body>
     </html>
   );

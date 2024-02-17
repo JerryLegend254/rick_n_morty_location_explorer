@@ -1,6 +1,7 @@
 "use client";
 import { truncateString } from "@/app/lib/utils";
 import { gql, useQuery, ApolloError } from "@apollo/client";
+import Link from "next/link";
 import { useState } from "react";
 
 const GET_CHARACTERS = gql`
@@ -79,9 +80,8 @@ const SearchLocationsByEpisode = () => {
             key={location.id}
             className="group rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:border-gray-200 hover:bg-gray-100 hover:dark:border-neutral-300 hover:dark:bg-neutral-400/30 w-[300px] flex-wrap"
           >
-            <a
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-              rel="noopener noreferrer"
+            <Link
+              href={`/location/${location.id}`}
             >
               <h2 className={`mb-1 text-xl font-semibold`}>
                 {truncateString(location.name)}
@@ -92,10 +92,10 @@ const SearchLocationsByEpisode = () => {
               <div className="mt-4 flex justify-between items-center gap-4">
                 <span className="flex-1 w-100 h-[2px] bg-gray-400"></span>
                 <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none text-blue-500 font-bold">
-                  -&gt;
+                  &gt;
                 </span>
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
