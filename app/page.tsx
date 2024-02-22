@@ -7,6 +7,8 @@ import Countries from "./ui/location/Location";
 import SearchLocationsByEpisode from "./ui/location/SearchLocation";
 import { ApolloWrapper } from "./apolloclientwrapper";
 import { useState } from "react";
+import RadioContainer from "./ui/filter/radioContainer";
+import RadioGroupContainer from "./ui/filter/radioGroupContainer";
 
 export default function Home() {
   const [selectedValue, setSelectedValue] = useState("location");
@@ -22,40 +24,7 @@ export default function Home() {
           <div className="flex flex-col xl:flex-row">
             <div className="w-[320px] flex flex-col items-center self-center mb-8 xl:self-start">
               <p className="text-xl font-semibold">Filter locations by: </p>
-              <div className="flex flex-col gap-2">
-                <div className="flex gap-2">
-                  <input
-                    type="radio"
-                    id="location"
-                    value="location"
-                    checked={selectedValue === "location"}
-                    onChange={() => handleRadioChange("location")}
-                  />
-                  <label htmlFor="location">Location Name</label>
-                </div>
-
-                <div className="flex gap-2">
-                  <input
-                    type="radio"
-                    id="character"
-                    value="character"
-                    checked={selectedValue === "character"}
-                    onChange={() => handleRadioChange("character")}
-                  />
-                  <label htmlFor="character">Character name</label>
-                </div>
-
-                <div className="flex gap-2">
-                  <input
-                    type="radio"
-                    id="episode"
-                    value="episode"
-                    checked={selectedValue === "episode"}
-                    onChange={() => handleRadioChange("episode")}
-                  />
-                  <label htmlFor="episode">Episode name</label>
-                </div>
-              </div>
+              <RadioGroupContainer handleRadioChange={handleRadioChange} selectedValue={selectedValue}/>
             </div>
             <SearchLocationsByEpisode filterType={selectedValue} />
           </div>
