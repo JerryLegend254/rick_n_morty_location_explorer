@@ -3,6 +3,7 @@ import { getClient } from "@/apollo-client";
 import { ApolloWrapper } from "@/app/apolloclientwrapper";
 import { addCharacterNote } from "@/app/lib/utils";
 import { BackButton } from "@/app/ui/btn";
+import AddNoteForm from "@/app/ui/character/AddNoteForm";
 import { gql, useQuery } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -99,22 +100,7 @@ export default function CharacterDetailsPage({
           </div>
         </div>
         {showForm && (
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div className="flex flex-col">
-              <label className="text-xl font-bold">Note</label>
-              <textarea
-                placeholder="Add character notes here..."
-                cols={40}
-                rows={10}
-                value={note}
-                className="border-2 border-blue-500 rounded-md px-4 py-2"
-                onChange={(e) => setNote(e.target.value)}
-              />
-            </div>
-            <button className="self-start bg-black text-white font-semibold py-2 px-4 rounded-md">
-              Submit
-            </button>
-          </form>
+          <AddNoteForm setNote={setNote} handleSubmit={handleSubmit} note={note} />
         )}
       </div>
       <Link
