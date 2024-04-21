@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ApolloProvider } from "@apollo/client";
 import Nav from "./ui/navbar/nav";
 import Footer from "./ui/footer/footer";
 
